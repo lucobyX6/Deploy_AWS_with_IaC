@@ -5,14 +5,14 @@
         "EC2Instance": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
-                "KeyName": "polystudent-kms1",
-                "InstanceType": "t2.micro",
-                "ImageId": "ami-0ff8a91507f77f867",
+                "KeyName": "tp4_inf8102",
+                "InstanceType": "t3.micro",
+                "ImageId": "ami-0360c520857e3138f",
                 "SecurityGroupIds": [
-                    "sg-0f4d131a59972664a"
+                    "sg-0211304eccdcf8466"
                 ],
-                "SubnetId": "subnet-03b7e0e782de6ee1c",
-                "IamInstanceProfile": "LabRole",
+                "SubnetId": "subnet-06cb3d80268826c21",
+                "IamInstanceProfile": "Labrole_tp4",
                 "BlockDeviceMappings": [
                     {
                         "DeviceName": "/dev/sda1",

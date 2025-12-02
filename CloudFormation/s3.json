@@ -6,7 +6,7 @@
             "DeletionPolicy": "Retain",
             "Type": "AWS::S3::Bucket",
             "Properties": {
-                "BucketName": "polystudents3",
+                "BucketName": "s3-114-cloudformation",
                 "AccessControl": "Private",
                 "PublicAccessBlockConfiguration": {
                     "BlockPublicAcls": true,
