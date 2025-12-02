@@ -272,7 +272,7 @@ if __name__ == "__main__":
 
     subnet_name = ["public_az1", "private_az1", "public_az2", "private_az2"]
     subnet_cidr = ["10.0.0.0/24", "10.0.128.0/24", "10.0.16.0/24", "10.0.144.0/24"]
-    avaibility_zone = ["us-east-1a", "us-east-1b"]
+    avaibility_zone = ["us-east-1a", "us-east-1a", "us-east-1b", "us-east-1b"]
 
     security_group_name = "vpc-114-security-group"
     security_group_description = "Security group allows SSH, HTTP, HTTPS, MSSQL, etc ..."
@@ -293,7 +293,7 @@ if __name__ == "__main__":
     print("[INFO] Create subnets")
     subnet = {}
     for i in range(len(subnet_name)):
-        subnet[subnet_name[i]] = create_subnet(subnet_name[i], subnet_cidr[i], vpc_id, avaibility_zone[i%(len(avaibility_zone))])
+        subnet[subnet_name[i]] = create_subnet(subnet_name[i], subnet_cidr[i], vpc_id, avaibility_zone[i])
     print(f"Subnets Id : {subnet}")
 
     print("[INFO] Create internet gateway")

@@ -218,7 +218,7 @@ def create_flow_logs(arn : str, vpc_id : str):
     LogDestination=arn,
 )
     
-def run_ec2_subnet(region : str, imageID : str, subnetID : str, name : str, security_group_id : str, kms_key : str):
+def run_ec2_subnet(region : str, imageID : str, subnetID : str, name : str, security_group_id : str, kms_key : str, iam_profile : str):
     """
         Abstract : Create a EC2 with specific parameters
 
@@ -258,6 +258,9 @@ def run_ec2_subnet(region : str, imageID : str, subnetID : str, name : str, secu
         },
         SubnetId=subnetID,
         SecurityGroupIds=[security_group_id],
+        IamInstanceProfile={
+            'Arn': iam_profile,
+        },
         TagSpecifications=[
             {
                 'ResourceType': 'instance',
@@ -271,7 +274,7 @@ def run_ec2_subnet(region : str, imageID : str, subnetID : str, name : str, secu
         ],
     )
 
-    return ec2_id["tp4-linux-public-AZ1"]["Instances"][0]["InstanceId"]
+    return ec2_id["Instances"][0]["InstanceId"]
 
 def create_sns_topic(name : str):
     """
@@ -374,7 +377,7 @@ if __name__ == "__main__":
 
     subnet_name = ["public_az1", "private_az1", "public_az2", "private_az2"]
     subnet_cidr = ["10.0.0.0/24", "10.0.128.0/24", "10.0.16.0/24", "10.0.144.0/24"]
-    avaibility_zone = ["us-east-1a", "us-east-1b"]
+    avaibility_zone = ["us-east-1a", "us-east-1a", "us-east-1b", "us-east-1b"]
 
     security_group_name = "vpc-114-security-group"
     security_group_description = "Security group allows SSH, HTTP, HTTPS, MSSQL, etc ..."
@@ -385,6 +388,7 @@ if __name__ == "__main__":
     ec2_ami = "ami-0360c520857e3138f"
     ec2_name = ["tp4-linux-public-AZ1", "tp4-windows-private-AZ1", "tp4-linux-public-AZ2", "tp4-windows-private-AZ2"]
     ec2_key = "arn:aws:kms:us-east-1:107079351100:key/f5ae5842-83c1-4d5c-bf68-7a878fa55877"
+    ec2_iam_profile = 'arn:aws:iam::107079351100:instance-profile/Labrole_tp4'
 
     sns_name = "sns-alarm-python"
 
@@ -399,7 +403,7 @@ if __name__ == "__main__":
     print("[INFO] Create subnets")
     subnet = {}
     for i in range(len(subnet_name)):
-        subnet[subnet_name[i]] = create_subnet(subnet_name[i], subnet_cidr[i], vpc_id, avaibility_zone[i%(len(avaibility_zone))])
+        subnet[subnet_name[i]] = create_subnet(subnet_name[i], subnet_cidr[i], vpc_id, avaibility_zone[i])
     print(f"Subnets Id : {subnet}")
 
     print("[INFO] Create internet gateway")
@@ -423,7 +427,7 @@ if __name__ == "__main__":
     print("[INFO] Create EC2 in private and public subnets")
     ec2 = {}
     for i in range(len(ec2_name)):
-        ec2[ec2_name[i]] = run_ec2_subnet(ec2_region, ec2_ami, subnet[subnet_name[1]], ec2_name[i], security_group_id, ec2_key)
+        ec2[ec2_name[i]] = run_ec2_subnet(ec2_region, ec2_ami, subnet[subnet_name[1]], ec2_name[i], security_group_id, ec2_key, ec2_iam_profile)
 
     print("[INFO] Create an SNS Topic to send alarms to an email address")
     sns_arn = create_sns_topic(sns_name)
