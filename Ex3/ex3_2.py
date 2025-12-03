@@ -427,7 +427,7 @@ if __name__ == "__main__":
     print("[INFO] Create EC2 in private and public subnets")
     ec2 = {}
     for i in range(len(ec2_name)):
-        ec2[ec2_name[i]] = run_ec2_subnet(ec2_region, ec2_ami, subnet[subnet_name[1]], ec2_name[i], security_group_id, ec2_key, ec2_iam_profile)
+        ec2[ec2_name[i]] = run_ec2_subnet(ec2_region, ec2_ami, subnet[subnet_name[i]], ec2_name[i], security_group_id, ec2_key, ec2_iam_profile)
 
     print("[INFO] Create an SNS Topic to send alarms to an email address")
     sns_arn = create_sns_topic(sns_name)
