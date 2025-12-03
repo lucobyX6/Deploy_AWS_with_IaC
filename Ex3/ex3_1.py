@@ -339,6 +339,6 @@ if __name__ == "__main__":
 
     print("[INFO] Create EC2 in private and public subnets")
     for i in range(len(subnet_name)):
-        run_ec2_subnet(ec2_region, ec2_ami, subnet[subnet_name[1]], ec2_name[i], security_group_id, ec2_key)
+        run_ec2_subnet(ec2_region, ec2_ami, subnet[subnet_name[i]], ec2_name[i], security_group_id, ec2_key)
 
     print("[INFO] End")
