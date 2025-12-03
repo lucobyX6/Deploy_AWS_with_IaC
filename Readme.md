@@ -12,7 +12,7 @@ Le répertoire du projet est constitué de la manière suivante :
 - `Ex2` : Contient le script `python` pour générer le compartiment S3.
 - `Ex3` : Contient les scripts `python` pour améliorer la sécurité des objets. Pour le VPC, le FlowLogs a été ajouté, un utilisateur renseigné et des alarmes implémentées. Pour le compartiment S3, la réplication et CloudTrail ont été activé. 
 - `Ex4` : Contient un script `python` pour générer des rapports de vulnérabilités des scripts précédents. 
-- `Rapport_TP4` : Le rapport du TP avec les illustrations du bon fonctionnement des programmes. 
+- `INF8102_AUT25_TP4_114_2471139_2486417.pdf` : Le rapport du TP avec les illustrations du bon fonctionnement des programmes. 
 - `Images` : Contient les images du fonctionnement. Les images sont celle présentées dans le rapport. 
 
 
